@@ -1,27 +1,36 @@
 ---
-title: "plotly"
+title: "dashboard"
 output: 
-  html_document:
-    code_folding: hide
-    toc: true
-    toc_float: true
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-```{r, message=FALSE}
+```{r setup, include=FALSE}
+library(flexdashboard)
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      fig.height = 6,
+                      fig.width = 8)
 library(tidyverse)
 library(plotly)
 library(p8105.datasets)
 ```
 
-```{r, import}
-data("instacart")
 
+```{r}
+data("instacart")
 instacart %>% 
   janitor::clean_names() %>% 
   drop_na()
 ```
 
-```{r, scatter}
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Number of Items Ordered on Friday
+
+```{r}
 instacart %>% 
   filter(order_dow == "5") %>% 
   select(order_dow,department,product_id) %>% 
@@ -30,7 +39,11 @@ instacart %>%
   plot_ly(x = ~department, y = ~number_of_items_ordered, color = ~department, type = "scatter") %>%
   layout(title = 'Number of Items Ordered on Friday')
 ```
-```{r, box}
+
+
+### Number of Times Products Ordered from Frozen Department annd Deli Department
+
+```{r}
 instacart %>% 
   filter(department == "frozen" | department == "deli") %>% 
   select(department, product_id, reordered) %>% 
@@ -39,6 +52,9 @@ instacart %>%
   plot_ly(x = ~department, y = ~times_ordered, color = ~department, type = "box") %>%
   layout(title = 'Number of Times Products Ordered from Frozen Department and Deli Department')
 ```
+
+
+### Number of Yogurt Ordered in Each Day in a Week
 
 ```{r, bar}
 instacart %>%
@@ -49,3 +65,4 @@ instacart %>%
   plot_ly(x = ~order_dow, y = ~number_ordered, color = ~order_dow, type = "bar") %>%
   layout(title = 'Number of Yogurt Ordered in Each Day in a Week')
 ```
+
