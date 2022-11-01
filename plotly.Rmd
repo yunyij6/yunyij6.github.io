@@ -1,0 +1,49 @@
+---
+title: "plotly"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+---
+
+```{r, message=FALSE}
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r}
+
+data("instacart")
+
+instacart %>% 
+  janitor::clean_names() %>% 
+  drop_na()
+
+
+instacart %>% 
+  filter(order_dow == "5", order_hour_of_day == "12") %>% 
+  select(order_dow,department,order_hour_of_day) %>% 
+  group_by(order_dow, order_hour_of_day) %>%
+  plot_ly(x = ~department, color = ~department, type = "scatter") %>%
+  layout(title = 'Items by Department Bought at 12 pm on Friday')
+
+instacart %>% 
+  filter(department == "frozen" | department == "deli") %>% 
+  select(department, product_id, reordered) %>% 
+  group_by(department, reordered) %>%
+  summarise(times_ordered = n()) %>%
+  plot_ly(x = ~department, y = ~times_ordered, color = ~department, type = "box") %>%
+  layout(title = 'Number of Times Products Ordered from Frozen Department and Deli Department')
+
+instacart %>%
+  filter(aisle == "yogurt") %>% 
+  select(aisle, order_dow, product_id) %>% 
+  group_by(aisle, order_dow) %>%
+  summarise(number_ordered = n()) %>%
+  plot_ly(x = ~order_dow, y = ~number_ordered, color = ~order_dow, type = "bar") %>%
+  layout(title = 'Number of Yogurt Ordered in Each Day in a Week')
+
+
+```
