@@ -23,11 +23,12 @@ instacart %>%
 
 
 instacart %>% 
-  filter(order_dow == "5", order_hour_of_day == "12") %>% 
-  select(order_dow,department,order_hour_of_day) %>% 
-  group_by(order_dow, order_hour_of_day) %>%
-  plot_ly(x = ~department, color = ~department, type = "scatter") %>%
-  layout(title = 'Items by Department Bought at 12 pm on Friday')
+  filter(order_dow == "5") %>% 
+  select(order_dow,department,product_id) %>% 
+  group_by(order_dow, department) %>%
+  summarise(number_of_items_ordered = n()) %>%
+  plot_ly(x = ~department, y = ~number_of_items_ordered, color = ~department, type = "scatter") %>%
+  layout(title = 'Number of Items Ordered on Friday')
 
 instacart %>% 
   filter(department == "frozen" | department == "deli") %>% 
