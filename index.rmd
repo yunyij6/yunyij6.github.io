@@ -9,7 +9,7 @@ output:
 
 # This is Yunyi Jiang's website
 
-Welcome to my website. You can learn more [about me](about.html) here.
+Welcome to my website. You can learn more [about me](About.html) here.
 
 Here are some links:
 my GitHub account: [GitHub](https://github.com/yunyij6)
