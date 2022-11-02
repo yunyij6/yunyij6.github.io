@@ -4,7 +4,7 @@ navbar:
   title: "Home"
   left:
     - text: "About"
-      href: https://docs.google.com/document/d/1zERfpWEgUUxDVHjrrSnZD6VVPPhtJYFM/edit?usp=share_link&ouid=107960638790633027211&rtpof=true&sd=true
+      href: about.html
     - text: Examples
       menu:
       - text: "Plotly"
