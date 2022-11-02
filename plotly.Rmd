@@ -30,6 +30,8 @@ instacart %>%
   plot_ly(x = ~department, y = ~number_of_items_ordered, color = ~department, type = "scatter") %>%
   layout(title = 'Number of Items Ordered on Friday')
 ```
+
+
 ```{r, box}
 instacart %>% 
   filter(department == "frozen" | department == "deli") %>% 
