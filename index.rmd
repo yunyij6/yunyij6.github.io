@@ -14,3 +14,4 @@ Welcome to my website. You can learn more [about me](about.html) here.
 Here are some links:
 my GitHub account: [GitHub](https://github.com/yunyij6)
 my email address: (yj2688@cumc.columbia.edu)
+my LinkedIn page: [LinkedIn](https://www.linkedin.com/in/yunyi-jiang-0298b522b/)
