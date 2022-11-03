@@ -4,9 +4,11 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    source_code: embed
 ---
 
 ```{r setup, include=FALSE}
+library(htmlwidgets)
 library(flexdashboard)
 knitr::opts_chunk$set(warning = FALSE,
                       message = FALSE,
@@ -17,20 +19,19 @@ library(plotly)
 library(p8105.datasets)
 ```
 
-
-```{r}
+```{r, echo=FALSE}
 data("instacart")
 instacart %>% 
   janitor::clean_names() %>% 
   drop_na()
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+Column
+-------------------------------------
+    
+### Chart 1
 
-### Number of Items Ordered on Friday
-
-```{r}
+```{r, echo=FALSE}
 instacart %>% 
   filter(order_dow == "5") %>% 
   select(order_dow,department,product_id) %>% 
@@ -40,10 +41,12 @@ instacart %>%
   layout(title = 'Number of Items Ordered on Friday')
 ```
 
+Column
+-------------------------------------
+   
+### Chart 2
 
-### Number of Times Products Ordered from Frozen Department annd Deli Department
-
-```{r}
+```{r, echo=FALSE}
 instacart %>% 
   filter(department == "frozen" | department == "deli") %>% 
   select(department, product_id, reordered) %>% 
@@ -52,11 +55,10 @@ instacart %>%
   plot_ly(x = ~department, y = ~times_ordered, color = ~department, type = "box") %>%
   layout(title = 'Number of Times Products Ordered from Frozen Department and Deli Department')
 ```
-
-
-### Number of Yogurt Ordered in Each Day in a Week
-
-```{r, bar}
+ 
+### Chart 3
+    
+```{r, echo=FALSE}
 instacart %>%
   filter(aisle == "yogurt") %>% 
   select(aisle, order_dow, product_id) %>% 
